@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Caavo App</title>
+  <meta name="description" content="">
+   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!--Angularjs-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.0.2/angularfire.min.js"></script>
+    <script type="text/javascript" src="http://dinus.org/assets/mail/jquery.mailtip.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link type="text/css" rel="stylesheet" href="http://dinus.org/assets/mail/mailtip.css"/>
+  
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <script src="bower_components/lodash/dist/lodash.min.js"></script>
+
+</head>
+<body>
+
+  <div class="container-fluid">
+       <div ng-view></div>
+  </div>
+  <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyC3m_cVt9YrRC-wT5d640F_2UhXBq5U_Qo",
+    authDomain: "health-heal.firebaseapp.com",
+    databaseURL: "https://health-heal.firebaseio.com",
+    projectId: "health-heal",
+    storageBucket: "",
+    messagingSenderId: "1043174548237"
+  };
+  firebase.initializeApp(config);
+</script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="http://code.angularjs.org/1.2.16/angular-resource.js"></script>
+  <script src="app.js"></script>
+  <script src="Login/view1.js"></script>
+  <script src="Registration/view2.js"></script>
+  <script src="client/client.controller.js"></script>
+  <script src="admin/admin.controller.js"></script>
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+  <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+</body>
+</html>

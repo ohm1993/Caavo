@@ -1,0 +1,147 @@
+<div class="navbar-wrapper">
+    <div class="container-fluid">
+        <nav class="navbar navbar-fixed-top">
+            <div class="container">
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#" class="">Caavo</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        <li><a class="">Signed in as {{user_name}}</a></li>
+                        <li class=""><a href="" ng-click="logout()">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>    
+<div class="row" style="margin-top:60px">
+    <div class="col-xs-6 col-sm-2 col-md-2">
+        <select class="form-control" ng-model="selectedName" ng-change="selectChanged(selectedName)" ng-model="data.unit">
+         <option  ng-repeat="item in names">{{item.name}}</option>
+        </select>
+        <div class="panel panel-primary" style="margin: 18px 0px 0px 0px;">
+            <div class="panel-heading" style="padding:0 0 0 8px;">
+               Aadhar Details
+            </div>
+            <div class="panel-body" style="padding:0 4px;">
+                <div class="row">
+                  <div class="col-xs-12" ng-show="showadhardata" style="max-height:300px;max-width:100%;overflow-y:auto;overflow-x:hidden;">
+                    <span>Name:{{aadharName}}</span>
+                    <span>Number:{{aadharNumber}}</span>
+                    <span>DOB:{{dob | date:'MM/dd/yyyy'}}</span>
+                    <span>Email:{{email}}</span>
+                  </div>
+                </div>
+            </div>
+        </div> 
+        <div class="panel panel-primary" style="margin: 18px 0px 0px 0px;">
+            <div class="panel-heading" style="padding:0 0 0 8px;">
+               Licence Details
+            </div>
+            <div class="panel-body" style="padding:0 4px;">
+                <div class="row">
+                  <div class="col-xs-12" ng-show="showlicenceData" style="max-height:300px;max-width:100%;overflow-y:auto;overflow-x:hidden;">
+                    <span>Name:{{drivername}}</span>
+                    <span>Number:{{licencenumber}}</span>
+                    <span>vehicleType:{{vehicletype}}</span>
+                    <span>Email:{{driveremail}}</span>
+                  </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4">
+         <script type="text/ng-template" id="myModalContent.html">
+            <div class="panel panel-info">
+                <div class="panel-heading">Driver Licence Form</div>
+                    <div class="panel-body">
+                        <form name="form" ng-submit="savelicenceData()" role="form">
+                             <table class="table">
+                                <tr>
+                                    <td>
+                                        <div class="form-group" ng-class="{ 'has-error': form.licence.$dirty && form.licence.$error.required }">
+                                            <input type="text" name="licence" id="licence" class="form-control" ng-model="license_number"  placeholder="Enter Licence Number" required />
+                                            <span ng-show="form.licence.$dirty && form.licence.$error.required" class="help-block"> Licence is required</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                      <div class="form-group" ng-class="{ 'has-error': form.driver_name.$dirty && form.driver_name.$error.required }">
+                                            <input type="text" name="driver_name" id="driver_name" class="form-control" ng-model="driver_name" placeholder="Enter Driver Name" required />
+                                            <span ng-show="form.driver_name.$dirty && form.driver_name.$error.required" class="help-block">Driver Name Required</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    <div class="form-group">
+                                    <select class="form-control" ng-model="selectwheicle" name=selectwheicle  ng-change="selectChanged(selectwheicle)" required>
+                                        <option  ng-repeat="item in vehicles">{{item.name}}</option>
+                                    </select>
+                                    
+                                    </div>
+                                       
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-danger btn-sm" style="width: 100%;"><i class="fa fa-envelope-o" style="padding-right: 5px;"></i>Submit</button>
+                                        <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>                   
+                </div>
+         </script>
+    </div>  
+    <div class="col-xs-4 col-sm-4 col-md-4">
+            <script type="text/ng-template" id="myModalContent1.html">
+            <div class="panel panel-info">
+                <div class="panel-heading">Aadhar Card Form</div>
+                    <div class="panel-body">
+                        <form name="form" ng-submit="saveadharData()" role="form">
+                             <table class="table">
+                                <tr>
+                                    <td>
+                                        <div class="form-group" ng-class="{ 'has-error': form.aadhar.$dirty && form.aadhar.$error.required }">
+                                            <input type="text" name="aadhar" id="aadhar" class="form-control" ng-model="aadhar_number"  placeholder="Enter Aadhar Number" required />
+                                            <span ng-show="form.aadhar.$dirty && form.aadhar.$error.required" class="help-block"> Aadhar No is required</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                      <div class="form-group" ng-class="{ 'has-error': form.aadhar_name.$dirty && form.aadhar_name.$error.required }">
+                                            <input type="text" name="aadhar_name" id="aadhar_name" class="form-control" ng-model="aadhar_name" placeholder="Enter Name" required />
+                                            <span ng-show="form.aadhar_name.$dirty && form.aadhar_name.$error.required" class="help-block">Aadhar Name Required</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                      <div class="form-group" ng-class="{ 'has-error': form.dob.$dirty && form.dob.$error.required }">
+                                            <input  type="date" ng-model="myDate" name="dob" id="dob" class="form-control" placeholder="Enter Date Of Birth" required />
+                                            <span ng-show="form.dob.$dirty && form.dob.$error.required" class="help-block">Date of birth required</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-danger btn-sm" style="width: 100%;"><i class="fa fa-envelope-o" style="padding-right: 5px;"></i> Send</button>
+                                        <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>                   
+                </div>
+         </script>
+           
+    </div>  
+
+</div> 
+               
